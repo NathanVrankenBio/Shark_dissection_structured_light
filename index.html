@@ -1,0 +1,602 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta content="charset=UTF-8"/>
+<title>3DHOP - 3D Heritage Online Presenter</title>
+<!--STYLESHEET-->
+<link type="text/css" rel="stylesheet" href="stylesheet/3dhop.css"/>
+	
+	<style>
+		input[type="color"] {
+			-webkit-appearance: none;
+			border: 3px solid #ccc;
+			width: 20px;
+			height: 20px;
+		}
+		input[type="color"]::-webkit-color-swatch-wrapper {
+			padding: 0;
+		}
+		input[type="color"]::-webkit-color-swatch {
+			border: none;
+		}
+		.button {
+		  background-color: transparent;
+		  border: none;
+		  color: rgba(128, 128, 128, .3);
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  cursor: pointer;
+		  width: 1px;
+		}
+
+		#rightmenu1 { position:absolute; top:12px; right: 12px; margin-left:50px; font-family:verdana; font-size:16px; color: white; background-color: rgba(70,70,70,.5); -webkit-user-select:none; -webkit-touch-callout:none; -khtml-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; touch-action:none; -ms-touch-action:none; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent; }		
+		#rightmenu2 { position:absolute; top:12px; right: 12px; margin-left:50px; font-family:verdana; font-size:16px; color: white; background-color: rgba(70,70,70,.5); -webkit-user-select:none; -webkit-touch-callout:none; -khtml-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; touch-action:none; -ms-touch-action:none; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent; }		
+		#rightmenu3 { position:absolute; top:12px; right: 12px; margin-left:50px; font-family:verdana; font-size:16px; color: white; background-color: rgba(70,70,70,.5); -webkit-user-select:none; -webkit-touch-callout:none; -khtml-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; touch-action:none; -ms-touch-action:none; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent; }		
+
+
+	</style>
+
+<!--SPIDERGL-->
+<script type="text/javascript" src="js/spidergl.js"></script>
+<!--JQUERY-->
+<script type="text/javascript" src="js/jquery.js"></script>
+<!--PRESENTER-->
+<script type="text/javascript" src="js/presenter.js"></script>
+<!--3D MODELS LOADING AND RENDERING-->
+<script type="text/javascript" src="js/nexus.js"></script>
+<script type="text/javascript" src="js/ply.js"></script>
+<!--TRACKBALLS-->
+<script type="text/javascript" src="js/trackball_turntable.js"></script>
+<script type="text/javascript" src="js/trackball_turntable_pan.js"></script>
+<script type="text/javascript" src="js/trackball_pantilt.js"></script>
+<script type="text/javascript" src="js/trackball_sphere.js"></script>
+<!--UTILITY-->
+<script type="text/javascript" src="js/init.js"></script>
+</head>
+	
+<body style="background-color:black;">
+<div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()"><div id="tdhlg"></div>
+ <div id="toolbar">
+  <img id="home"        title="Home"                   src="skins/light/home.png"/><br/>
+<!--NEXTMODEL-->
+  <img id="next_model"  title="Show Next Model"        src="skins/light/next.png" onclick="toggle_menus()" /><br/>
+<!--NEXTMODEL-->
+<!--ZOOM-->
+  <img id="zoomin"      title="Zoom In"                src="skins/light/zoomin.png"/><br/>
+  <img id="zoomout"     title="Zoom Out"               src="skins/light/zoomout.png"/><br/>
+<!--ZOOM-->
+<!--LIGHTING-->
+  <img id="lighting"     title="Disable Lighting"      src="skins/light/lighting.png" style="position:absolute; visibility:hidden;"/>  
+  <img id="lighting_off" title="Enable Lighting"       src="skins/light/lighting_off.png"/><br/> 
+<!--LIGHTING-->
+<!--SCREENSHOT-->
+  <img id="screenshot" title="Save Screenshot"   src="skins/light/screenshot.png"/><br/>
+<!--SCREENSHOT-->
+<!--FULLSCREEN-->
+  <img id="full_on"     title="Exit Full Screen"       src="skins/light/full_on.png" style="position:absolute; visibility:hidden;"/>
+  <img id="full"        title="Full Screen"            src="skins/light/full.png"/><br/>
+<!--FULLSCREEN-->
+
+<!--POINT PICKING-->
+<!--
+  <img id="pick_on"     title="Disable PickPoint Mode" src="skins/light/pick_on.png" style="position:absolute; visibility:hidden;"/>
+  <img id="pick"        title="Enable PickPoint Mode"  src="skins/light/pick.png"/><br/>
+-->
+<!--POINT PICKING-->
+
+ </div>
+
+<!--POINT PICKING-->
+<!--
+ <div id="pickpoint-box" class="output-box">XYZ picked point<hr/><span id="pickpoint-output" class="output-text" onmousedown="event.stopPropagation()">[ 0 , 0 , 0 ]</span></div>
+-->
+<!--POINT PICKING-->
+
+<!--ANNOTATIONS-->
+
+
+	<div id="rightmenu1">
+		<form>
+			<p><tr><td><center><b> Lesser spotted dogfish </b><br> 
+			</p><p><i> Scyliorhinus canicula </i> <br> (Linnaeus, 1758) </center></td></tr></p><hr/>
+
+			<p><b> &nbsp; Sensory system </b> &nbsp;<br>
+				<input id="Mouth" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Mouth',true,false)" > Mouth &nbsp;<br>
+				<input id="Nostril" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Nostril',true,false)" > Nostril &nbsp;<br>
+				<input id="Ampullae of Lorenzini" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Ampullae of Lorenzini',true,false)" > Ampullae of Lorenzini <sup>1</sup> &nbsp;<br>
+				<input id="Eye" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Eye',true,false)" > Eye &nbsp;<br>
+				<input id="Endolymphatic pore" type="radio" name="annot" style="margin-left:10px;" 
+										       disabled > Endolymphatic pore <sup>2</sup> &nbsp;<br>
+
+			</p><p><b> &nbsp; Respiratory system </b> &nbsp;<br>
+				<input id="Spiraculum" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Spiraculum',true,false)" > Spiraculum <sup>1</sup> &nbsp;<br>
+				<input id="Gill slits" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Gill slits',true,false)" > Gill slits &nbsp;<br>
+
+			</p><p><b> &nbsp; Locomotor system </b> &nbsp;<br>
+				<input id="Pectoral fin" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Pectoral fin',true,false)" > Pectoral fin &nbsp;<br>
+				<input id="Pelvic fin" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Pelvic fin',true,false)" > Pelvic fin &nbsp;<br>
+				<input id="Dorsal fins" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Dorsal fin1_1',true,false)
+					;presenter.setInstanceVisibility('Dorsal fin1_2',true,false)" > Dorsal fins &nbsp;<br>
+				<input id="Anal fin" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Anal fin',true,false)" > Anal fin &nbsp;<br>
+				<input id="Caudal fin" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Caudal fin',true,false)" > Caudal fin &nbsp;<br>
+
+			</p><p><b> &nbsp; Reproductive system </b> &nbsp;<br>				
+				<input id="Clasper" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Clasper',true,false)" > Clasper &nbsp;<br>
+
+			</p><p><b> &nbsp; Excretory system </b> &nbsp;<br>	
+				<input id="Cloaca" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Cloaca',true,false)" > Cloaca &nbsp;<br>
+
+			</p><p><b> &nbsp; Parasites </b> &nbsp;<br>	
+				<input id="Parasite" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)
+					;presenter.setInstanceVisibility('Parasite',true,false)" > Parasitic copepod &nbsp;<br>
+			</p><p>
+				<input id="none" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step1',true,false)" checked > <i>None</i>&nbsp;
+			</p><p>
+				<sub><i> &nbsp;&nbsp;&nbsp; 1: unclear/indistinguishable <br> &nbsp;&nbsp;&nbsp; 2: not visible </i></sub>&nbsp;
+			</p>
+
+		</form>			
+	</div>
+
+<div hidden id="rightmenu2">
+		<form>
+			<p><tr><td><center><b> Lesser spotted dogfish </b><br> 
+			</p><p><i> Scyliorhinus canicula </i> <br> (Linnaeus, 1758) </center></td></tr></p><hr/>
+
+			<p><b> &nbsp; Digestive system </b> &nbsp;<br>
+				<input id="Oesophagus2" type="radio" name="annot" style="margin-left:10px;" 
+										       disabled > Oesophagus <sup>2</sup> &nbsp;<br>
+				<input id="Stomach2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Stomach2',true,false)" > Stomach &nbsp;<br>
+				<input id="Liver left lobe2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Liver left lobe2',true,false)" > Liver left lobe &nbsp;<br>
+				<input id="Liver median lobe2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Liver median lobe2',true,false)" > Liver median lobe &nbsp;<br>
+				<input id="Liver right lobe2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Liver right lobe2',true,false)" > Liver right lobe &nbsp;<br>
+				<input id="Gallbladder2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Gallbladder2',true,false)" > Gallbladder <sup>1</sup> &nbsp;<br>
+				<input id="Bile duct2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Bile duct2',true,false)" > Bile duct &nbsp;<br>
+				<input id="Pancreas2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Pancreas2',true,false)" > Pancreas &nbsp;<br>
+				<input id="Pylorus2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Pylorus2',true,false)" > Pylorus &nbsp;<br>
+				<input id="Duodenum2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Duodenum2',true,false)" > Duodenum &nbsp;<br>
+				<input id="Spiral valve intestine2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Spiral valve intestine2',true,false)" > Spiral valve intestine &nbsp;<br>
+				<input id="Rectum2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Rectum2',true,false)" > Rectum &nbsp;<br>
+				<input id="Rectal gland2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Rectal gland2',true,false)" > Rectal gland &nbsp;<br>
+				<input id="Cloaca2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Cloaca2',true,false)" > Cloaca &nbsp;
+
+			</p><p><b> &nbsp; Cardiovascular system </b> &nbsp;<br>
+				<input id="Heart2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Heart2',true,false)" > Heart &nbsp;<br>
+
+			</p><p><b> &nbsp; Respiratory system </b> &nbsp;<br>
+				<input id="Gills2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Gills2',true,false)" > Gills &nbsp;<br>
+
+			</p><p><b> &nbsp; Lymphatic system </b> &nbsp;<br>
+				<input id="Spleen2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Spleen2',true,false)" > Spleen &nbsp;<br>
+
+			</p><p><b> &nbsp; Urinary system </b> &nbsp;<br>
+				<input id="Kidney2" type="radio" name="annot" style="margin-left:10px;" 
+										       disabled > Kidney <sup>2</sup> &nbsp;<br>
+
+			</p><p><b> &nbsp; Reproductive system </b> &nbsp;<br>
+				<input id="Testis2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Testis2',true,false)" > Testis &nbsp;<br>
+				<input id="Epididymis2" type="radio" name="annot" style="margin-left:10px;" 
+										       disabled > Epididymis <sup>2</sup> &nbsp;<br>
+				<input id="Seminal vesicles2" type="radio" name="annot" style="margin-left:10px;" 
+										       disabled > Seminal vesicles <sup>2</sup> &nbsp;<br>
+				<input id="Clasper2" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)
+					;presenter.setInstanceVisibility('Clasper2',true,false)" > Clasper &nbsp;<br>
+
+			</p><p>
+				<input id="none" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step2',true,false)" checked > <i>None</i>&nbsp;
+			</p><p>
+				<sub><i> &nbsp;&nbsp;&nbsp; 1: unclear/indistinguishable <br> &nbsp;&nbsp;&nbsp; 2: not visible </i></sub>&nbsp;
+			</p>
+
+		</form>			
+	</div>
+
+<div hidden id="rightmenu3">
+		<form>
+			<p><tr><td><center><b> Lesser spotted dogfish </b><br> 
+			</p><p><i> Scyliorhinus canicula </i> <br> (Linnaeus, 1758) </center></td></tr></p><hr/>
+
+			<p><b> &nbsp; Digestive system </b> &nbsp;<br>
+				<input id="Oesophagus3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Oesophagus3',true,false)" > Oesophagus &nbsp;<br>
+				<input id="Stomach3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Stomach3',true,false)" > Stomach &nbsp;<br>
+				<input id="Liver left lobe3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Liver left lobe3',true,false)" > Liver left lobe &nbsp;<br>
+				<input id="Liver median lobe3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Liver median lobe3',true,false)" > Liver median lobe &nbsp;<br>
+				<input id="Liver right lobe3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Liver right lobe3',true,false)" > Liver right lobe &nbsp;<br>
+				<input id="Gallbladder3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Gallbladder3',true,false)" > Gallbladder <sup>1</sup> &nbsp;<br>
+				<input id="Bile duct3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Bile duct3_1',true,false)
+					;presenter.setInstanceVisibility('Bile duct3_2',true,false)" > Bile duct &nbsp;<br>
+				<input id="Pancreas3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Pancreas3',true,false)" > Pancreas &nbsp;<br>
+				<input id="Pylorus3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Pylorus3',true,false)" > Pylorus &nbsp;<br>
+				<input id="Duodenum3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Duodenum3',true,false)" > Duodenum &nbsp;<br>
+				<input id="Spiral valve intestine3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Spiral valve intestine3',true,false)" > Spiral valve intestine &nbsp;<br>
+				<input id="Rectum3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Rectum3',true,false)" > Rectum &nbsp;<br>
+				<input id="Rectal gland3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Rectal gland3',true,false)" > Rectal gland &nbsp;<br>
+				<input id="Cloaca3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Cloaca3',true,false)" > Cloaca &nbsp;
+
+			</p><p><b> &nbsp; Cardiovascular system </b> &nbsp;<br>
+				<input id="Heart3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Heart3',true,false)" > Heart &nbsp;<br>
+
+			</p><p><b> &nbsp; Respiratory system </b> &nbsp;<br>
+				<input id="Gills3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Gills3',true,false)" > Gills &nbsp;<br>
+
+			</p><p><b> &nbsp; Lymphatic system </b> &nbsp;<br>
+				<input id="Spleen3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Spleen3',true,false)" > Spleen &nbsp;<br>
+
+			</p><p><b> &nbsp; Urinary system </b> &nbsp;<br>
+				<input id="Kidney3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Kidney3_1',true,false)
+					;presenter.setInstanceVisibility('Kidney3_2',true,false)" > Kidney <sup>1</sup> &nbsp;<br>
+
+			</p><p><b> &nbsp; Reproductive system </b> &nbsp;<br>
+				<input id="Testis3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Testis3',true,false)" > Testis &nbsp;<br>
+				<input id="Epididymis3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Epididymis3',true,false)" > Epididymis &nbsp;<br>
+				<input id="Seminal vesicles3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Seminal vesicles3',true,false)" > Seminal vesicles &nbsp;<br>
+				<input id="Clasper3" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)
+					;presenter.setInstanceVisibility('Clasper3',true,false)" > Clasper &nbsp;<br>
+			</p><p>
+				<input id="none" type="radio" name="annot" style="cursor:hand;margin-left:10px;" onclick=
+					"presenter.setInstanceVisibility(HOP_ALL,false,true)
+					;presenter.setInstanceVisibility('step3',true,false)" checked > <i>None</i>&nbsp;
+			</p><p>
+				<sub><i> &nbsp;&nbsp;&nbsp; 1: unclear/indistinguishable <br> &nbsp;&nbsp;&nbsp; 2: not visible </i></sub>&nbsp;
+			</p>
+
+		</form>			
+	</div>
+
+
+
+<!--ANNOTATIONS-->
+
+ <canvas id="draw-canvas" style="background:black"/>
+</div>
+
+</body>
+
+
+<script type="text/javascript">
+
+function toggle_menus() {
+  var rm1 = document.getElementById("rightmenu1");
+  var rm2 = document.getElementById("rightmenu2");
+  var rm3 = document.getElementById("rightmenu3");
+  if (rm1.style.display !== "none") {
+    rm1.style.display = "none"; rm2.style.display = "block";
+  }
+  else if (rm2.style.display !== "none") {
+    rm2.style.display = "none"; rm3.style.display = "block";
+  }
+  else if (rm3.style.display !== "none") {
+    rm3.style.display = "none"; rm1.style.display = "block";
+  }
+}
+
+var presenter = null;
+
+function setup3dhop() {
+	presenter = new Presenter("draw-canvas");
+
+	presenter.setScene({
+		meshes: {
+			"mesh_1" : { url: "shark_dissection1.nxs" },
+			"mesh_2" : { url: "shark_dissection2.nxs" },
+			"mesh_3" : { url: "shark_dissection3.nxs" },
+			"mesh_annot": { url: "arrow_annotations.nxs" },
+		},
+		modelInstances : {
+			"model_1" : { mesh  : "mesh_1", tags : ["step1"], color : [1,1,1] },
+			"model_2" : { mesh  : "mesh_2", tags : ["step2"], color : [1,1,1] },
+			"model_3" : { mesh  : "mesh_3", tags : ["step3"], color : [1,1,1] },
+
+			"model_Mouth" : { mesh: "mesh_annot", tags: ["Mouth"], transform: {translation:[163.48 , 28.89 , 24.26],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Nostril" : { mesh: "mesh_annot", tags: ["Nostril"], transform: {translation:[168.81 , 24.10 , 39.09],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Ampullae of Lorenzini" : { mesh: "mesh_annot", tags: ["Ampullae of Lorenzini"], transform: {translation:[175.78 , 22.65 , 30.23],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Eye" : { mesh: "mesh_annot", tags: ["Eye"], transform: {translation:[144.92 , 10.73 , 43.02],rotation:[50,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Spiraculum" : { mesh: "mesh_annot", tags: ["Spiraculum"], transform: {translation:[132.40 , 9.29 , 43.54],rotation:[50,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Gill slits" : { mesh: "mesh_annot", tags: ["Gill slits"], transform: {translation:[102.71 , 26.53 , 51.63],rotation:[50,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Pectoral fin" : { mesh: "mesh_annot", tags: ["Pectoral fin"], transform: {translation:[55.21 , 25.69 , 60.85],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Pelvic fin" : { mesh: "mesh_annot", tags: ["Pelvic fin"], transform: {translation:[-59.88 , 36.34 , 34.43],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Dorsal fin1_1" : { mesh: "mesh_annot", tags: ["Dorsal fin1_1"], transform: {translation:[-128.22 , 7.98 , 32.08],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Dorsal fin1_2" : { mesh: "mesh_annot", tags: ["Dorsal fin1_2"], transform: {translation:[-176.56 , 7.61 , -56.88],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Anal fin" : { mesh: "mesh_annot", tags: ["Anal fin"], transform: {translation:[-138.20 , 29.39 , -19.08],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Caudal fin" : { mesh: "mesh_annot", tags: ["Caudal fin"], transform: {translation:[-86.65 , 11.86 , -76.39],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Clasper" : { mesh: "mesh_annot", tags: ["Clasper"], transform: {translation:[-82.92 , 44.18 , 15.17],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Cloaca" : { mesh: "mesh_annot", tags: ["Cloaca"], transform: {translation:[-55.48 , 43.14 , 6.53],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Parasite" : { mesh: "mesh_annot", tags: ["Parasite"], transform: {translation:[-74.90 , 39.72 , 9.81],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+
+			"model_Liver left lobe2" : { mesh: "mesh_annot", tags: ["Liver left lobe2"], transform: {translation:[80.85 , 33.31 , 41.94],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Liver median lobe2" : { mesh: "mesh_annot", tags: ["Liver median lobe2"], transform: {translation:[64.65 , 37.67 , 23.32],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Liver right lobe2" : { mesh: "mesh_annot", tags: ["Liver right lobe2"], transform: {translation:[52.59 , 26.76 , -13.98],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Gallbladder2" : { mesh: "mesh_annot", tags: ["Gallbladder2"], transform: {translation:[68.14 , 34.37 , 13.90],rotation:[-50,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Bile duct2" : { mesh: "mesh_annot", tags: ["Bile duct2"], transform: {translation:[57.36 , 28.61 , 10.61],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Heart2" : { mesh: "mesh_annot", tags: ["Heart2"], transform: {translation:[100.65 , 31.71 , 22.04],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Spleen2" : { mesh: "mesh_annot", tags: ["Spleen2"], transform: {translation:[-7.64 , 31.77 , 55.09],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Gills2" : { mesh: "mesh_annot", tags: ["Gills2"], transform: {translation:[116.67 , 20.38 , 59.09],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Stomach2" : { mesh: "mesh_annot", tags: ["Stomach2"], transform: {translation:[37.01 , 38.30 , 40.54],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Pancreas2" : { mesh: "mesh_annot", tags: ["Pancreas2"], transform: {translation:[ 29.88 , 29.26 , 1.53],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Pylorus2" : { mesh: "mesh_annot", tags: ["Pylorus2"], transform: {translation:[0.31 , 34.71 , 43.57],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Duodenum2" : { mesh: "mesh_annot", tags: ["Duodenum2"], transform: {translation:[16.49 , 34.81 , 20.95],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Spiral valve intestine2" : { mesh: "mesh_annot", tags: ["Spiral valve intestine2"], transform: {translation:[7.10 , 23.11 , -14.75],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Rectal gland2" : { mesh: "mesh_annot", tags: ["Rectal gland2"], transform: {translation:[-26.34 , 32.29 , 12.89],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Rectum2" : { mesh: "mesh_annot", tags: ["Rectum2"], transform: {translation:[-31.12 , 24.61 , -9.27],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Clasper2" : { mesh: "mesh_annot", tags: ["Clasper2"], transform: {translation:[-82.43 , 42.50 , 14.28],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Cloaca2" : { mesh: "mesh_annot", tags: ["Cloaca2"], transform: {translation:[-54.65 , 38.53 , 6.89],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Testis2" : { mesh: "mesh_annot", tags: ["Testis2"], transform: {translation:[49.06 , 24.60 , 4.72],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+
+			"model_Liver left lobe3" : { mesh: "mesh_annot", tags: ["Liver left lobe3"], transform: {translation:[15.74 , 13.30 , -101.62],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Liver median lobe3" : { mesh: "mesh_annot", tags: ["Liver median lobe3"], transform: {translation:[27.26 , 10.93 , -75.55],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Liver right lobe3" : { mesh: "mesh_annot", tags: ["Liver right lobe3"], transform: {translation:[16.62 , 14.31 , -41.78],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Gallbladder3" : { mesh: "mesh_annot", tags: ["Gallbladder3"], transform: {translation:[37.50 , 12.93 , -76.04],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Bile duct3_1" : { mesh: "mesh_annot", tags: ["Bile duct3_1"], transform: {translation:[48.35 , 13.35 , -70.44],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Bile duct3_2" : { mesh: "mesh_annot", tags: ["Bile duct3_2"], transform: {translation:[66.90 , 33.77 , 90.17],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Heart3" : { mesh: "mesh_annot", tags: ["Heart3"], transform: {translation:[100.54 , 30.97 , 22.36],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Spleen3" : { mesh: "mesh_annot", tags: ["Spleen3"], transform: {translation:[80.48 , 21.99 , 116.56],rotation:[50,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Gills3" : { mesh: "mesh_annot", tags: ["Gills3"], transform: {translation:[116.69 , 20.70 , 59.35],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Oesophagus3" : { mesh: "mesh_annot", tags: ["Oesophagus3"], transform: {translation:[86.49 , 27.88 , 20.26],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Stomach3" : { mesh: "mesh_annot", tags: ["Stomach3"], transform: {translation:[83.82 , 33.75 , 73.60],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Pancreas3" : { mesh: "mesh_annot", tags: ["Pancreas3"], transform: {translation:[  2.94 , 17.91 , 89.31],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Pylorus3" : { mesh: "mesh_annot", tags: ["Pylorus3"], transform: {translation:[68.67 , 31.36 , 100.50],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Duodenum3" : { mesh: "mesh_annot", tags: ["Duodenum3"], transform: {translation:[45.14 , 20.33 , 98.39],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Spiral valve intestine3" : { mesh: "mesh_annot", tags: ["Spiral valve intestine3"], transform: {translation:[-28.36 , 17.49 , 69.16],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Rectal gland3" : { mesh: "mesh_annot", tags: ["Rectal gland3"], transform: {translation:[-26.00 , 31.54 , 8.12],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Rectum3" : { mesh: "mesh_annot", tags: ["Rectum3"], transform: {translation:[-38.12 , 26.94 , 30.64],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Clasper3" : { mesh: "mesh_annot", tags: ["Clasper3"], transform: {translation:[-81.59 , 41.86 , 12.83],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Cloaca3" : { mesh: "mesh_annot", tags: ["Cloaca3"], transform: {translation:[-57.11 , 36.16 , 5.97],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Testis3" : { mesh: "mesh_annot", tags: ["Testis3"], transform: {translation:[49.96 , 16.90 , -8.45],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Kidney3_1" : { mesh: "mesh_annot", tags: ["Kidney3_1"], transform: {translation:[23.37 , 23.72 , 26.74],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Kidney3_2" : { mesh: "mesh_annot", tags: ["Kidney3_2"], transform: {translation:[57.51 , 21.75 , 35.87],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Epididymis3" : { mesh: "mesh_annot", tags: ["Epididymis3"], transform: {translation:[50.34 , 25.48 , 29.14],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+			"model_Seminal vesicles3" : { mesh: "mesh_annot", tags: ["Seminal vesicles3"], transform: {translation:[-2.60 , 29.17 , 21.06],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
+
+		},
+		trackball: {
+			type : TurntablePanTrackball,
+			trackOptions : {
+				startPhi: 0.0,
+				startTheta: 35.0,
+				startDistance: 3,
+				minMaxPhi: [-1000, 1000],
+				minMaxTheta: [-10.0, 90.0],
+				minMaxDist: [0.5, 8.0]
+			}
+		},
+		space: {
+			cameraType: "perspective",
+			cameraFOV: 35.0,
+			sceneLighting: false
+		}
+	});
+	presenter.setInstanceVisibility(HOP_ALL, false, true);
+	presenter.setInstanceVisibility('step1', true, false);
+	
+
+
+<!--
+//--POINT PICKING--
+	presenter._onEndPickingPoint = onEndPick;
+//--POINT PICKING--
+-->
+
+}
+
+function actionsToolbar(action) {
+	if(action=='home') presenter.resetTrackball();
+//--FULLSCREEN--
+	else if(action=='full'  || action=='full_on') fullscreenSwitch();
+//--FULLSCREEN--
+//--ZOOM--
+	else if(action=='zoomin') presenter.zoomIn();
+	else if(action=='zoomout') presenter.zoomOut();
+//--ZOOM--
+//--LIGHTING--
+	else if(action=='lighting' || action=='lighting_off') { presenter.enableSceneLighting(!presenter.isSceneLightingEnabled()); lightingSwitch(); }
+//--LIGHTING--
+//--SCREENSHOT--
+	else if(action=='screenshot') presenter.saveScreenshot();
+//--SCREENSHOT--
+//--NEXTMODEL--
+        else if(action=='next_model') {
+		if(presenter.isInstanceVisibilityEnabled('step1')==true) { presenter.setInstanceVisibility(HOP_ALL, false, true); presenter.setInstanceVisibility('step2', true, false) }
+		else if(presenter.isInstanceVisibilityEnabled('step2')==true) { presenter.setInstanceVisibility(HOP_ALL, false, true); presenter.setInstanceVisibility('step3', true, false)}
+		else if(presenter.isInstanceVisibilityEnabled('step3')==true) { presenter.setInstanceVisibility(HOP_ALL, false, true); presenter.setInstanceVisibility('step1', true, false) }
+	}
+	else if(action=='annot' || action=='annot_on') { sectiontoolReset(); sectiontoolSwitch(); }
+//--NEXTMODEL--
+<!--
+//--POINT PICKING--
+	else if(action=='pick' || action=='pick_on') { presenter.enablePickpointMode(!presenter.isPickpointModeEnabled()); pickpointSwitch(); }
+//--POINT PICKING--
+-->
+}
+
+
+//--PICKPOINT--
+<!--
+function onEndPick(point) {
+	// .toFixed(2) sets the number of decimals when displaying the picked point	
+	var x = point[0].toFixed(2);
+	var y = point[1].toFixed(2);
+	var z = point[2].toFixed(2);
+    $('#pickpoint-output').html("[ "+x+" , "+y+" , "+z+" ]");
+}
+-->
+//--PICKPOINT--	
+
+$(document).ready(function(){
+	init3dhop();
+
+	setup3dhop();
+});
+</script>
+</html>
