@@ -61,7 +61,7 @@
  <div id="toolbar">
   <img id="home"        title="Home"                   src="skins/light/home.png"/><br/>
 <!--NEXTMODEL-->
-  <img id="next_model"  title="Show Next Model"        src="skins/light/next.png" onclick="toggle_menus()" /><br/>
+  <img id="next_model"  title="Show Next Model"        src="skins/light/next.png" onclick="toggle_menus()"/><br/>
 <!--NEXTMODEL-->
 <!--ZOOM-->
   <img id="zoomin"      title="Zoom In"                src="skins/light/zoomin.png"/><br/>
@@ -410,8 +410,8 @@
 
 
  <div id="logos">
- <img src="RBINS_logo.png" height="60" width="113.16" style="opacity:0.5;" /> &nbsp&nbsp;&nbsp;
- <img src="UH_logo.png" height="40" width="168.76" style="opacity:0.5;" /> 
+ <img src="RBINS_logo.png" height="50" width="94.3" style="opacity:0.5;" /> &nbsp&nbsp;&nbsp;
+ <img src="UH_logo.png" height="50" width="210.95" style="opacity:0.5;" /> 
  </div>
 
 <!--ANNOTATIONS-->
@@ -446,10 +446,10 @@ function setup3dhop() {
 
 	presenter.setScene({
 		meshes: {
-			"mesh_1" : { url: "shark_dissection1.nxz" },
-			"mesh_2" : { url: "shark_dissection2.nxz" },
-			"mesh_3" : { url: "shark_dissection3.nxz" },
-			"mesh_annot": { url: "arrow_annotations.nxz" },
+			"mesh_1" : { url: "models/shark_dissection1.nxz" },
+			"mesh_2" : { url: "models/shark_dissection2.nxz" },
+			"mesh_3" : { url: "models/shark_dissection3.nxz" },
+			"mesh_annot": { url: "models/arrow_annotations.nxz" }
 		},
 		modelInstances : {
 			"model_1" : { mesh  : "mesh_1", tags : ["step1"], color : [1,1,1] },
@@ -490,13 +490,6 @@ function setup3dhop() {
 			"model_Clasper2" : { mesh: "mesh_annot", tags: ["Clasper2"], transform: {translation:[-82.43 , 42.50 , 14.28],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
 			"model_Cloaca2" : { mesh: "mesh_annot", tags: ["Cloaca2"], transform: {translation:[-54.65 , 38.53 , 6.89],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
 			"model_Testis2" : { mesh: "mesh_annot", tags: ["Testis2"], transform: {translation:[49.06 , 24.60 , 4.72],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
-			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
-			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
-			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
-			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
-			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
-			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
-			"model_" : { mesh: "mesh_annot", tags: [""], transform: {translation:[],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
 
 			"model_Liver left lobe3" : { mesh: "mesh_annot", tags: ["Liver left lobe3"], transform: {translation:[15.74 , 13.30 , -101.62],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
 			"model_Liver median lobe3" : { mesh: "mesh_annot", tags: ["Liver median lobe3"], transform: {translation:[27.26 , 10.93 , -75.55],rotation:[0,0,0],scale:[1.5,1.5,1.5]}, useLighting:false },
@@ -604,3 +597,4 @@ $(document).ready(function(){
 });
 </script>
 </html>
+
