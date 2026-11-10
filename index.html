@@ -14,14 +14,15 @@
             left: 0 !important;
             right: 0 !important;
             bottom: 0 !important;
-            width: 75% !important;
-            height: 75% !important;
+            width: 100% !important;
+            height: 100% !important;
             background-color: rgba(0, 0, 0, 0.88) !important;
             z-index: 999999 !important;
             justify-content: center !important;
             align-items: center !important;
             font-family: Verdana, sans-serif !important;
             box-sizing: border-box !important;
+			pointer-events: auto !important;
         }
         .terms-card {
             background-color: #222 !important;
@@ -33,6 +34,7 @@
             width: 90% !important;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8) !important;
             box-sizing: border-box !important;
+			pointer-events: auto !important;
         }
         .terms-title {
             font-size: 18px !important;
@@ -53,6 +55,7 @@
             color: #ccc !important;
             margin-bottom: 16px !important;
             border-radius: 4px !important;
+			pointer-events: auto !important;
         }
         .terms-checkbox-label {
             display: flex !important;
@@ -63,11 +66,13 @@
             user-select: none !important;
             margin-bottom: 18px !important;
             color: #eee !important;
+			pointer-events: auto !important;
         }
         .terms-checkbox-label input[type="checkbox"] {
             width: 18px !important;
             height: 18px !important;
             cursor: pointer !important;
+			pointer-events: auto !important;
         }
         .terms-btn {
             background-color: #0076d6 !important;
@@ -80,6 +85,7 @@
             cursor: pointer !important;
             width: 100% !important;
             transition: background-color 0.2s !important;
+			pointer-events: auto !important;
         }
         .terms-btn:disabled {
             background-color: #444 !important;
@@ -143,8 +149,8 @@
 	
 <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()"><div id="tdhlg"></div>
 	
-<div id="termsModalOverlay">
-  <div class="terms-card">
+<div id="termsModalOverlay" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()" onmouseup="event.stopPropagation()">
+  <div class="terms-card" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()">
     <div class="terms-title">Terms of Use</div>
     <div class="terms-text">
       	<h2>Terms of Use</h2>
@@ -215,11 +221,11 @@
   			</li>
 			</ol>
     </div>
-    <label class="terms-checkbox-label">
-      <input type="checkbox" id="termsCheckbox" onchange="toggleAgreeButton()" />
-      <span>I declare that I have read and accepted the full terms of use.</span>
+    <label class="terms-checkbox-label" onmousedown="event.stopPropagation()">
+      <input type="checkbox" id="termsCheckbox" onchange="toggleAgreeButton()" onclick="event.stopPropagation()" />
+      <span>I have read and agree to the Terms of Use</span>
     </label>
-    <button id="agreeBtn" class="terms-btn" disabled onclick="acceptTerms()">Submit</button>
+    <button id="agreeBtn" class="terms-btn" disabled onclick="acceptTerms(event)">Enter Site</button>
   </div>
 </div>
 	
@@ -589,6 +595,22 @@
 
 <script type="text/javascript">
 
+function toggleAgreeButton() {
+  var chk = document.getElementById("termsCheckbox");
+  var btn = document.getElementById("agreeBtn");
+  if (btn && chk) {
+    btn.disabled = !chk.checked;
+  }
+}
+
+function acceptTerms(e) {
+  if (e) e.stopPropagation();
+  var modal = document.getElementById("termsModalOverlay");
+  if (modal) {
+    modal.style.setProperty("display", "none", "important");
+  }
+}
+	
 function toggle_menus() {
   var rm1 = document.getElementById("rightmenu1");
   var rm2 = document.getElementById("rightmenu2");
