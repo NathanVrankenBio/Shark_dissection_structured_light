@@ -149,86 +149,6 @@
 	
 <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()"><div id="tdhlg"></div>
 	
-<div id="termsModalOverlay" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()" onmouseup="event.stopPropagation()">
-  <div class="terms-card" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()">
-    <div class="terms-title">Terms of Use</div>
-    <div class="terms-text">
-      	<h2>Terms of Use</h2>
-		<h3>Real Dissections 3D (RD3D) – Hasselt University</h3>
-		<ol>
-  			<li>
-    			<strong>Ownership</strong>
-    			<p>The RD3D platform, including 3D models, annotations and documentation, is the exclusive property of UHasselt.</p>
-  			</li>
-
-  			<li>
-    			<strong>Mandatory acknowledgement</strong>
-    			<p>In any use, UHasselt must be clearly acknowledged as owner of the platform.</p>
-  			</li>
-
-  			<li>
-    			<strong>Citation in publications</strong>
-    			<p>Any publication, presentation, thesis, teaching material or online communication based on the platform must explicitly mention UHasselt as developer.</p>
-    
-    			<p><strong>Minimum wording:</strong></p>
-    			<p>“These results were obtained using the RD3D platform, developed by UHasselt.”</p>
-    
-    			<p><strong>Recommended citation – APA:</strong></p>
-    			<p>UHasselt. (year of use). <em>Real Dissections 3D (RD3D) – digital platform</em>. Hasselt University. <a href="https://www.aquaticbiodiversityteam.be/education/RD3D" target="_blank" rel="noopener">https://www.aquaticbiodiversityteam.be/education/RD3D</a>.</p>
-    
-    			<p><strong>Recommended citation – Chicago:</strong></p>
-    			<p>UHasselt. <em>Real Dissections 3D (RD3D) – digital platform</em>. Hasselt University, accessed [date], <a href="https://www.aquaticbiodiversityteam.be/education/RD3D" target="_blank" rel="noopener">https://www.aquaticbiodiversityteam.be/education/RD3D</a>.</p>
-  			</li>
-
-  			<li>
-    			<strong>No transfer of rights</strong>
-    			<p>Free access does not grant any (intellectual property) rights to the platform or its content.</p>
-  			</li>
-
-  			<li>
-    			<strong>Permitted use</strong>
-    			<p>The platform may only be used for all non-commercial purposes. Modifications to content or functionality are prohibited without written consent from UHasselt.</p>
-  			</li>
-
-  			<li>
-    			<strong>Commercial use</strong>
-    			<p>Any direct or indirect commercial use is prohibited without prior written consent from UHasselt. UHasselt may require a license agreement and fee.</p>
-  			</li>
-
-  			<li>
-    			<strong>Disclaimer of liability</strong>
-    			<p>UHasselt cannot be held liable for any damage, errors, omissions or consequences resulting from the use of the platform, nor for decisions based on it.</p>
-  			</li>
-
-  			<li>
-    			<strong>Availability</strong>
-    			<p>UHasselt may take the platform offline, restrict or modify it at any time without prior notice. No right to continuity or compensation can be derived from this.</p>
-  			</li>
-
-  			<li>
-    			<strong>Privacy</strong>
-    			<p>Personal data of users will be used solely for access management, monitoring of use and communication about the platform, in accordance with UHasselt’s privacy policy.</p>
-  			</li>
-
-  			<li>
-    			<strong>Termination</strong>
-    			<p>In case of non-compliance with these terms, UHasselt may terminate access immediately.</p>
-  			</li>
-
-  			<li>
-    			<strong>Acceptance</strong>
-    			<p>By using the platform, the user declares to have read and accepted these terms.</p>
-  			</li>
-			</ol>
-    </div>
-    <label class="terms-checkbox-label" onmousedown="event.stopPropagation()">
-      <input type="checkbox" id="termsCheckbox" onchange="toggleAgreeButton()" onclick="event.stopPropagation()" />
-      <span>I have read and agree to the Terms of Use</span>
-    </label>
-    <button id="agreeBtn" class="terms-btn" disabled onclick="acceptTerms(event)">Submit</button>
-  </div>
-</div>
-	
  <div id="toolbar">
   <img id="home"        title="Home"                   src="skins/light/home.png"/><br/>
 <!--NEXTMODEL-->
@@ -590,6 +510,86 @@
  <canvas id="draw-canvas" style="background:black"/>
 </div>
 
+<div id="termsModalOverlay" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()" onmouseup="event.stopPropagation()">
+  <div class="terms-card" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()">
+    <div class="terms-title">Terms of Use</div>
+    <div class="terms-text">
+      	<h2>Terms of Use</h2>
+		<h3>Real Dissections 3D (RD3D) – Hasselt University</h3>
+		<ol>
+  			<li>
+    			<strong>Ownership</strong>
+    			<p>The RD3D platform, including 3D models, annotations and documentation, is the exclusive property of UHasselt.</p>
+  			</li>
+
+  			<li>
+    			<strong>Mandatory acknowledgement</strong>
+    			<p>In any use, UHasselt must be clearly acknowledged as owner of the platform.</p>
+  			</li>
+
+  			<li>
+    			<strong>Citation in publications</strong>
+    			<p>Any publication, presentation, thesis, teaching material or online communication based on the platform must explicitly mention UHasselt as developer.</p>
+    
+    			<p><strong>Minimum wording:</strong></p>
+    			<p>“These results were obtained using the RD3D platform, developed by UHasselt.”</p>
+    
+    			<p><strong>Recommended citation – APA:</strong></p>
+    			<p>UHasselt. (year of use). <em>Real Dissections 3D (RD3D) – digital platform</em>. Hasselt University. <a href="https://www.aquaticbiodiversityteam.be/education/RD3D" target="_blank" rel="noopener">https://www.aquaticbiodiversityteam.be/education/RD3D</a>.</p>
+    
+    			<p><strong>Recommended citation – Chicago:</strong></p>
+    			<p>UHasselt. <em>Real Dissections 3D (RD3D) – digital platform</em>. Hasselt University, accessed [date], <a href="https://www.aquaticbiodiversityteam.be/education/RD3D" target="_blank" rel="noopener">https://www.aquaticbiodiversityteam.be/education/RD3D</a>.</p>
+  			</li>
+
+  			<li>
+    			<strong>No transfer of rights</strong>
+    			<p>Free access does not grant any (intellectual property) rights to the platform or its content.</p>
+  			</li>
+
+  			<li>
+    			<strong>Permitted use</strong>
+    			<p>The platform may only be used for all non-commercial purposes. Modifications to content or functionality are prohibited without written consent from UHasselt.</p>
+  			</li>
+
+  			<li>
+    			<strong>Commercial use</strong>
+    			<p>Any direct or indirect commercial use is prohibited without prior written consent from UHasselt. UHasselt may require a license agreement and fee.</p>
+  			</li>
+
+  			<li>
+    			<strong>Disclaimer of liability</strong>
+    			<p>UHasselt cannot be held liable for any damage, errors, omissions or consequences resulting from the use of the platform, nor for decisions based on it.</p>
+  			</li>
+
+  			<li>
+    			<strong>Availability</strong>
+    			<p>UHasselt may take the platform offline, restrict or modify it at any time without prior notice. No right to continuity or compensation can be derived from this.</p>
+  			</li>
+
+  			<li>
+    			<strong>Privacy</strong>
+    			<p>Personal data of users will be used solely for access management, monitoring of use and communication about the platform, in accordance with UHasselt’s privacy policy.</p>
+  			</li>
+
+  			<li>
+    			<strong>Termination</strong>
+    			<p>In case of non-compliance with these terms, UHasselt may terminate access immediately.</p>
+  			</li>
+
+  			<li>
+    			<strong>Acceptance</strong>
+    			<p>By using the platform, the user declares to have read and accepted these terms.</p>
+  			</li>
+			</ol>
+    </div>
+    <label class="terms-checkbox-label" onmousedown="event.stopPropagation()">
+      <input type="checkbox" id="termsCheckbox" onchange="toggleAgreeButton()" onclick="event.stopPropagation()" />
+      <span>I have read and agree to the Terms of Use</span>
+    </label>
+    <button id="agreeBtn" class="terms-btn" disabled onclick="acceptTerms(event)">Submit</button>
+  </div>
+</div>
+	
 </body>
 
 
@@ -608,6 +608,11 @@ function acceptTerms(e) {
   var modal = document.getElementById("termsModalOverlay");
   if (modal) {
     modal.style.setProperty("display", "none", "important");
+  }
+
+  window.dispatchEvent(new Event('resize'));
+  if (typeof presenter !== "undefined" && presenter && presenter.ui) {
+    presenter.ui.postDraw();
   }
 }
 	
